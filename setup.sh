@@ -9,7 +9,10 @@ pip install pandas==2.1.4
 
 # Install spacy and download model
 pip install spacy==3.7.2
-python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_sm --no-deps
+
+# Verify spacy installation and model
+python -c "import spacy; spacy.load('en_core_web_sm')"
 
 # Create streamlit config directory
 mkdir -p ~/.streamlit/

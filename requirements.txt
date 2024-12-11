@@ -1,0 +1,10 @@
+streamlit
+pandas
+plotly
+numpy
+PyMuPDF
+spacy
+scikit-learn
+matplotlib
+reportlab
+python-dateutil

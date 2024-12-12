@@ -16,14 +16,79 @@ from datetime import datetime
 # Load NLP model
 nlp = spacy.load("en_core_web_sm")
 # Dữ liệu mẫu cho CV
-names = ["Nguyễn Anh Tuấn", "Trần Văn A", "Lê Thị B", "Nguyễn Thị C", "Phan Đức D"]
-cities = ["Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "Cần Thơ", "Nha Trang"]
-emails = ["nguyen.tuan@example.com", "tran.a@example.com", "le.b@example.com", "nguyen.c@example.com", "phan.d@example.com"]
-phones = ["0987654321", "0912345678", "0909876543", "0981234567", "0918765432"]
-skills = ["Python, Java, SQL", "C#, JavaScript, HTML, CSS", "Node.js, React, MongoDB", "Java, Kotlin, Android", "Go, Ruby, Docker"]
-projects = ["Hệ thống quản lý sinh viên (2020)", "Ứng dụng di động cho công ty XYZ", "Website bán hàng trực tuyến", "Hệ thống theo dõi sức khỏe người dùng", "Ứng dụng chatbot hỗ trợ khách hàng"]
-achievements = ["Giải Nhất Hackathon 2021", "Nhân viên xuất sắc Công ty XYZ", "Giải Ba cuộc thi lập trình quốc gia", "Giải Nhất cuộc thi Code Wars"]
-degrees = ["Cử nhân Công nghệ Thông tin", "Cử nhân Kỹ thuật Phần mềm", "Cử nhân Quản trị Kinh doanh", "Thạc sĩ Khoa học Máy tính"]
+names = ["Nguyễn Anh Tuấn", "Trần Văn A", "Lê Thị B", "Nguyễn Thị C", "Phan Đức D",
+         "Lê Quốc Đạt", "Võ Thị Ngọc Hương", "Hoàng Trọng Duy", "Phạm Văn Thành", "Nguyễn Thu Hà",
+         "Trần Quốc Vương", "Đỗ Thị Quỳnh Mai", "Lê Minh Huy", "Phạm Ngọc Khánh", "Hoàng Thị Mỹ Linh",
+         "Lê Quốc Đạt", "Trần Hoài Nam", "Nguyễn Thanh Vũ", "Lê Thị Mai Anh", "Phạm Minh Long",
+         "Trần Quang Huy", "Lê Hoàng Minh", "Nguyễn Hải Yến", "Phạm Văn Hải", "Trần Thị Mai Phương",
+         "Hoàng Minh Khang", "Lâm Thị Ngọc Mai", "Vũ Thị Hoa", "Trần Quốc Bảo", "Phạm Ngọc Linh",
+         "Hồ Minh Quân", "Trương Văn Bình", "Đặng Minh Hùng", "Nguyễn Hải Yến", "Lê Thanh Tuấn",
+         "Nguyễn Duy Nam", "Phạm Văn Hải", "Trần Thị Mai Phương", "Hoàng Minh Khang", "BÙI VĂN Q",
+         "ĐẶNG TUẤN P"]
+
+cities = ["Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "Cần Thơ", "Nha Trang",
+          "Hà Nội", "Đà Nẵng", "TP. Hồ Chí Minh", "Hà Nội", "TP. Hải Phòng",
+          "TP. Nha Trang", "Hà Nội", "TP. Hồ Chí Minh", "TP. Cần Thơ", "TP. Hồ Chí Minh",
+          "Hà Nội", "TP. Hồ Chí Minh", "TP. Đà Nẵng", "TP. Đà Nẵng", "TP. Hồ Chí Minh",
+          "TP. Hà Nội", "TP. Hồ Chí Minh", "Huế", "Hà Nội", "Đà Nẵng",
+          "Hà Nội", "Đà Lạt", "Hải Phòng", "Hồ Chí Minh", "Đà Nẵng",
+          "Hà Nội", "Đồng Nai", "Bình Dương", "Huế", "Cần Thơ",
+          "Hồ Chí Minh", "Hải Phòng", "Đà Nẵng", "Hà Nội", "TP.HCM",
+          "Hà Nội"]
+
+skills = ["Python, Java, SQL", "C#, JavaScript, HTML, CSS", "Node.js, React, MongoDB", "Java, Kotlin, Android", "Go, Ruby, Docker",
+          "Java, .NET, Oracle Database", "Data Analysis", "AI, Machine Learning", "Blockchain, Smart Contracts", "Mobile Development",
+          "MySQL, GoLang", "AI, TensorFlow", "Network Security, Python", "IoT, C++, Arduino", "Data Analysis, Tableau",
+          "Java, .NET, Oracle Database", "Angular, Bootstrap", "Java, Spring Boot, Docker", "Java, Spring Boot, Docker", "Angular, Bootstrap",
+          "JavaScript, Python, C++, Docker, Git, Jenkins", "DevOps, Docker, Jenkins", "Python, Java", "Big Data, Hadoop, Spark", "HTML, CSS, JavaScript, Vue.js",
+          "JavaScript, TypeScript, Node.js", "Photoshop, Illustrator", "Articulate, Moodle", "React, Node.js, MongoDB", "Content Writing, Social Media",
+          "Agile, Scrum", "Java, Go, Docker", "Flutter, Dart, Swift", "Python, Java", "SQL, Python, Tableau",
+          "AWS, Azure, Docker, Kubernetes", "Big Data, Spark", "Frontend Development", "JavaScript, TypeScript, SQL", "Java, Spring Boot, MySQL",
+          "DevOps, CI/CD"]
+
+projects = ["Hệ thống quản lý sinh viên (2020)", "Ứng dụng di động cho công ty XYZ", "Website bán hàng trực tuyến", "Hệ thống theo dõi sức khỏe người dùng", "Ứng dụng chatbot hỗ trợ khách hàng",
+            "Ứng dụng quản lý tài khoản ngân hàng (2022)", "Phân tích dữ liệu khách hàng", "Ứng dụng AI trong sản xuất", "Smart Contract Platform", "Ứng dụng di động thương mại",
+            "Hệ thống thanh toán trực tuyến (2022)", "Dự đoán bệnh dựa trên dữ liệu lớn", "Hệ thống phát hiện tấn công mạng", "Hệ thống điều khiển đèn thông minh", "Hệ thống dự đoán doanh thu",
+            "Ứng dụng quản lý tài khoản ngân hàng", "Nền tảng thương mại điện tử đa kênh", "Hệ thống quản lý học sinh", "Hệ thống quản lý học sinh", "Nền tảng thương mại điện tử đa kênh",
+            "Hệ thống quản lý học sinh (2023)", "Tối ưu hóa triển khai phần mềm", "Dự án nghiên cứu ML", "Hệ thống phân tích dữ liệu khách hàng", "Ứng dụng quản lý bệnh viện",
+            "Hệ thống quản lý kho hàng (2022)", "Thiết kế logo và branding", "Khóa học Kỹ năng mềm", "Ứng dụng quản lý bán hàng", "Chiến dịch marketing số",
+            "Quản lý dự án phần mềm lớn", "Hệ thống quản lý năng lượng tái tạo", "Ứng dụng quản lý lịch trình", "Dự án nghiên cứu ML", "Hệ thống dự đoán doanh thu ngành bán lẻ",
+            "Hệ thống tự động triển khai web", "Phân tích dữ liệu lớn", "Ứng dụng quản lý bệnh viện", "Hệ thống quản lý doanh nghiệp", "Hệ thống quản lý Java Enterprise",
+            "Hệ thống CI/CD"]
+
+achievements = ["Giải Nhất Hackathon 2021", "Nhân viên xuất sắc Công ty XYZ", "Giải Ba cuộc thi lập trình quốc gia", "Giải Nhất cuộc thi Code Wars",
+                "Nhân viên xuất sắc năm 2021 tại Vietcombank", "Top 10 Data Analyst 2022", "Giải nhất AI Challenge 2021", "Best Blockchain Developer 2022", "Mobile Developer of the Year",
+                "Giải thưởng Sáng tạo Tech 2022", "Chứng nhận TensorFlow Developer", "CEH Certification", "Cisco CCNA", "Tableau Specialist",
+                "Nhân viên xuất sắc năm 2021", "Giải Ba Hackathon 2021", "Google Cloud Certification", "AWS Certification", "Nhân viên xuất sắc 2022",
+                "Giải Nhì Hackathon Cloud Computing 2020", "Top 3 Data Science Challenge", "Nhân viên tiêu biểu 2021", "Java Certification", "Google Analytics Certification",
+                "PMP Certification", "Giải thưởng sáng kiến công nghệ", "UI/UX Design Award", "Scrum Master Certification", "Digital Marketing Excellence",
+                "Best Project Manager 2022"]
+
+degrees = ["Cử nhân Công nghệ Thông tin", "Cử nhân Kỹ thuật Phần mềm", "Cử nhân Quản trị Kinh doanh", "Thạc sĩ Khoa học Máy tính",
+           "Cử nhân Hệ thống Thông tin Quản lý", "Thạc sĩ Khoa học Dữ liệu", "Cử nhân Trí tuệ Nhân tạo", "Cử nhân An toàn Thông tin",
+           "Cử nhân IoT", "Cử nhân Phân tích Dữ liệu", "Thạc sĩ An toàn Thông tin", "Cử nhân Kỹ thuật Máy tính",
+           "Cử nhân Khoa học Dữ liệu", "Thạc sĩ Trí tuệ Nhân tạo", "Cử nhân Công nghệ Phần mềm", "Thạc sĩ Khoa học Máy tính",
+           "Cử nhân Hệ thống Thông tin", "Cử nhân Mạng máy tính", "Thạc sĩ Kỹ thuật Phần mềm", "Cử nhân Khoa học Máy tính"]
+
+emails = ["nguyen.tuan@example.com", "tran.a@example.com", "le.b@example.com", "nguyen.c@example.com", "phan.d@example.com",
+          "lequocdat@example.com", "ngochuong@example.com", "trongduy@example.com", "vanthanh@example.com", "thuha@example.com",
+          "quocvuong@example.com", "quynhmai@example.com", "minhhuy@example.com", "ngockhanh@example.com", "mylinh@example.com",
+          "lequocdat@example.com", "hoainam@example.com", "thanhvu@example.com", "maianh@example.com", "minhlong@example.com",
+          "quanghuy@example.com", "hoangminh@example.com", "haiyen@example.com", "vanhai@example.com", "maiphuong@example.com",
+          "minhkhang@example.com", "ngocmai@example.com", "thihoa@example.com", "quocbao@example.com", "ngoclinh@example.com",
+          "minhquan@example.com", "vanbinh@example.com", "minhhung@example.com", "haiyen@example.com", "thanhtuan@example.com",
+          "duynam@example.com", "vanhai@example.com", "maiphuong@example.com", "minhkhang@example.com", "buiq@example.com",
+          "tuanp@example.com"]
+
+phones = ["0987654321", "0912345678", "0909876543", "0981234567", "0918765432",
+          "0912456789", "0909123456", "0908234567", "0907345678", "0906456789",
+          "0905567890", "0987345678", "0912987654", "0909123456", "0908765432",
+          "0912456789", "0909876543", "0979123456", "0979123456", "0909876543",
+          "0987654321", "0988123456", "0908776654", "0911223344", "0933445566",
+          "0922334455", "0905777766", "0912345678", "0988112233", "0905123456",
+          "0938778889", "0975223344", "0988332211", "0908776654", "0938776543",
+          "0909776655", "0911223344", "0933445566", "0922334455", "0907654321",
+          "0901231234"]
 
 # Hàm tạo CV ngẫu nhiên
 def generate_cv():
@@ -104,26 +169,73 @@ def generate_pdf(cv_text, file_name):
     
 # Danh sách kỹ năng phổ biến
 SKILLS_KEYWORDS = [
- # Programming Languages
+    # Programming Languages
     "python", "javascript", "sql", "java", "c++", "c#", "php", "ruby", "swift",
-    
+    "typescript", "kotlin", "go", "rust", "scala", "r", "matlab", "perl",
+    "objective-c", "dart", "lua", "haskell", "assembly",
+
     # Frameworks & Libraries
-    "react", "node.js", "angular", "vue.js", "django", "flask", "spring",
-    
+    "react", "node.js", "angular", "vue.js", "django", "flask", "spring", "express.js",
+    "laravel", "asp.net", "ruby on rails", "jquery", "bootstrap", "tailwind",
+    "next.js", "nuxt.js", "flutter", "react native", "xamarin", "tensorflow",
+    "pytorch", "keras", "pandas", "numpy", "scikit-learn", "redux", "graphql",
+
     # Cloud & DevOps
     "aws", "azure", "gcp", "docker", "kubernetes", "jenkins", "git",
-    
+    "terraform", "ansible", "puppet", "chef", "circleci", "travis ci",
+    "github actions", "bitbucket", "gitlab", "nginx", "apache", "linux",
+    "windows server", "bash", "shell scripting", "powershell",
+
     # Big Data & AI
     "hadoop", "spark", "big data", "machine learning", "ai", "deep learning",
-    
+    "data mining", "data science", "natural language processing", "computer vision",
+    "neural networks", "reinforcement learning", "data analytics", "tableau",
+    "power bi", "elasticsearch", "kafka", "airflow", "databricks",
+
     # Databases
     "mysql", "mongodb", "postgresql", "firebase", "oracle",
-    
-    # Methodologies
-    "scrum", "agile", "waterfall", "kanban",
-    
+    "sql server", "redis", "cassandra", "dynamodb", "mariadb",
+    "neo4j", "sqlite", "couchdb", "influxdb", "elasticsearch",
+
+    # Frontend
+    "html", "css", "sass", "less", "webpack", "babel", "responsive design",
+    "web accessibility", "seo", "pwa", "web components", "material ui",
+    "ant design", "chakra ui", "styled components",
+
+    # Backend
+    "rest api", "soap", "microservices", "websocket", "grpc", "oauth",
+    "jwt", "api gateway", "load balancing", "caching", "message queues",
+    "rabbitmq", "redis", "memcached",
+
+    # Testing
+    "unit testing", "integration testing", "selenium", "jest", "mocha",
+    "cypress", "junit", "pytest", "testng", "cucumber", "postman",
+
+    # Methodologies & Practices
+    "scrum", "agile", "waterfall", "kanban", "lean", "tdd", "bdd",
+    "ci/cd", "devops", "itil", "solid principles", "design patterns",
+    "mvc", "mvvm", "clean architecture",
+
+    # Security
+    "cybersecurity", "encryption", "oauth", "jwt", "ssl/tls",
+    "penetration testing", "security audit", "firewall", "vpn",
+
+    # Mobile Development
+    "ios", "android", "react native", "flutter", "xamarin",
+    "swift ui", "kotlin multiplatform", "mobile security",
+
+    # Version Control
+    "git", "svn", "mercurial", "github", "gitlab", "bitbucket",
+    "git flow", "trunk based development",
+
+    # Project Management
+    "jira", "trello", "asana", "confluence", "notion",
+    "microsoft project", "basecamp",
+
     # Additional Skills
-    "rest api", "microservices", "devops", "ci/cd"
+    "blockchain", "ethereum", "smart contracts", "solidity",
+    "ar/vr", "unity", "unreal engine", "webgl", "three.js",
+    "iot", "embedded systems", "raspberry pi", "arduino"
     
 ]
 

@@ -214,7 +214,7 @@ SKILLS_KEYWORDS = [
     # Methodologies & Practices
     "scrum", "agile", "waterfall", "kanban", "lean", "tdd", "bdd",
     "ci/cd", "devops", "itil", "solid principles", "design patterns",
-    "mvc", "mvvm", "clean architecture",
+    "mvc", "mvvm", "clean architecture", "CI/CD ",
 
     # Security
     "cybersecurity", "encryption", "oauth", "jwt", "ssl/tls",
@@ -390,35 +390,47 @@ def extract_cv_sections(content):
 def extract_years_of_experience(text):
     text = text.lower()
     current_year = datetime.now().year
+    total_years = 0
     
-    # Case 1: Tìm pattern "X năm kinh nghiệm"
-    if "năm kinh nghiệm" in text:
-        try:
-            index = text.find("năm kinh nghiệm")
-            previous_text = text[max(0, index-20):index]
-            numbers = re.findall(r'\d+', previous_text)
-            if numbers:
-                return int(numbers[-1])
-        except:
-            pass
+    # Tìm phần KINH NGHIỆM LÀM VIỆC
+    start_index = text.find("kinh nghiệm làm việc")
+    end_index = text.find("kỹ năng")
+    if start_index != -1 and end_index != -1:
+        exp_section = text[start_index:end_index]
+        
+        # Debug: In ra section được tìm thấy
+        print("Experience section:", exp_section)
+        
+        # Tìm các khoảng "20XX - Nay"
+        current_matches = re.findall(r'(20\d{2})\s*-\s*(nay|present)', exp_section)
+        if current_matches:
+            start_year = int(current_matches[0][0])
+            current_exp = current_year - start_year
+            total_years += current_exp
+            print(f"Current experience: {current_exp} years ({start_year}-{current_year})")
+        
+        # Tìm các khoảng "20XX - 20YY"
+        past_matches = re.findall(r'(20\d{2})\s*-\s*(20\d{2})', exp_section)
+        for start_year, end_year in past_matches:
+            years = int(end_year) - int(start_year)
+            total_years += years
+            print(f"Past experience: {years} years ({start_year}-{end_year})")
+        
+        print(f"Total years: {total_years}")
+        if total_years > 0:
+            return total_years
     
-    # Case 2: Tìm pattern "20XX - Nay" hoặc "20XX - Present"
-    matches = re.findall(r'(20\d{2})\s*-\s*(nay|present)', text)
-    if matches:
-        start_year = int(matches[0][0])
-        return current_year - start_year
-    
-    # Case 3: Dựa vào số lượng kỹ năng và dự án
+    # Fallback cases
     skills = extract_skills_with_spacy(text)
     num_skills = len(skills)
     if num_skills >= 8:
-        return 7  # Senior
+        return 7
     elif num_skills >= 5:
-        return 4  # Middle
+        return 4
     elif num_skills >= 3:
-        return 2  # Junior
+        return 2
     else:
-        return 1  # Fresher
+        return 1
 
 # Main User view
 st.set_page_config(page_title="AI CV Analysis", layout="wide")

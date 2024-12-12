@@ -345,7 +345,7 @@ if role == "User":
         - 📈 Đề xuất kỹ năng cần phát triển
         """)
     with col2:
-    st.image("https://img.freepik.com/free-vector/cv-template-minimalist-style_23-2148911517.jpg", width=200)
+        st.image("https://img.freepik.com/free-vector/cv-template-minimalist-style_23-2148911517.jpg", width=200)
     
     st.markdown("---")
     st.subheader("📄 Tải CV của bạn")

@@ -345,9 +345,7 @@ if role == "User":
         - 📈 Đề xuất kỹ năng cần phát triển
         """)
     with col2:
-        file_id = "1JAyBH_j7-jt1c7v-A44OqFAlUxOkQD95"
-        direct_link = f"https://drive.google.com/uc?export=view&id={file_id}"
-        st.image(direct_link, width=200)
+    st.image("https://img.freepik.com/free-vector/cv-template-minimalist-style_23-2148911517.jpg", width=200)
     
     st.markdown("---")
     st.subheader("📄 Tải CV của bạn")

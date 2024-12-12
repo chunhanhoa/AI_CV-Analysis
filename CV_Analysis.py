@@ -104,15 +104,26 @@ def generate_pdf(cv_text, file_name):
     
 # Danh sách kỹ năng phổ biến
 SKILLS_KEYWORDS = [
-    'java', 'spring boot', 'spring', 'mysql', 'nosql', 'c#' # Thêm spring boot và nosql
-    'python', 'Python', 'javascript', 'html', 'css', 'sql', 'tensorflow', 'firebase', 'Jenkins', 'Selenium', 'JUnit'
-    'pytorch', 'data analysis', 'machine learning', 'deep learning', 'ai', 'web development',
-    'android', 'flutter', 'node.js', 'react', 'php', 'cloud', 'aws', 'azure', 'docker', 'git',
-    'jira', 'gitlab', 'kubernetes', 'ci/cd', 'devops', 'cybersecurity', 'data visualization',
-    'excel', 'tableau', 'big data', 'statistics', 'r', 'sas', 'unity', 'game development',
-    'ui/ux design', 'product management', 'agile', 'scrum', 'business analysis', 'seo', 'marketing'
-    'Hadoop', 'Tableau', 'Power BI', 'MongoDB', 'Swift', 'Objective-C', 'Xcode', 'Figma', 'Swift', 'Dart',
-    'Go', 
+ # Programming Languages
+    "python", "javascript", "sql", "java", "c++", "c#", "php", "ruby", "swift",
+    
+    # Frameworks & Libraries
+    "react", "node.js", "angular", "vue.js", "django", "flask", "spring",
+    
+    # Cloud & DevOps
+    "aws", "azure", "gcp", "docker", "kubernetes", "jenkins", "git",
+    
+    # Big Data & AI
+    "hadoop", "spark", "big data", "machine learning", "ai", "deep learning",
+    
+    # Databases
+    "mysql", "mongodb", "postgresql", "firebase", "oracle",
+    
+    # Methodologies
+    "scrum", "agile", "waterfall", "kanban",
+    
+    # Additional Skills
+    "rest api", "microservices", "devops", "ci/cd"
     
 ]
 
@@ -207,18 +218,17 @@ def extract_skills_with_spacy(text):
     doc = nlp(text.lower())
     skills_found = []
     
-    # Tìm kiếm các kỹ năng đơn lẻ
+    # Single token skills
     for token in doc:
         if token.text in SKILLS_KEYWORDS:
             skills_found.append(token.text)
     
-    # Tìm kiếm các cụm từ kỹ năng (ví dụ: "spring boot")
+    # Multi-token skills (for phrases like "machine learning")
     for skill in SKILLS_KEYWORDS:
-        if ' ' in skill:  # Nếu là cụm từ
-            if skill in text.lower():
-                skills_found.append(skill)
-    
-    return list(set(skills_found))
+        if ' ' in skill and skill in text.lower():
+            skills_found.append(skill)
+            
+    return list(set(skills_found))  # Remove duplicates
 
 # Predict candidate level based on skills and experience
 def predict_candidate_level(years_of_experience, num_skills):

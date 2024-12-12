@@ -53,7 +53,7 @@ projects = ["Hệ thống quản lý sinh viên (2020)", "Ứng dụng di độn
             "Hệ thống quản lý học sinh (2023)", "Tối ưu hóa triển khai phần mềm", "Dự án nghiên cứu ML", "Hệ thống phân tích dữ liệu khách hàng", "Ứng dụng quản lý bệnh viện",
             "Hệ thống quản lý kho hàng (2022)", "Thiết kế logo và branding", "Khóa học Kỹ năng mềm", "Ứng dụng quản lý bán hàng", "Chiến dịch marketing số",
             "Quản lý dự án phần mềm lớn", "Hệ thống quản lý năng lượng tái tạo", "Ứng dụng quản lý lịch trình", "Dự án nghiên cứu ML", "Hệ thống dự đoán doanh thu ngành bán lẻ",
-            "Hệ thống tự động triển khai web", "Phân tích dữ liệu lớn", "Ứng dụng quản lý bệnh viện", "Hệ thống quản lý doanh nghiệp", "Hệ thống quản lý Java Enterprise",
+            "Hệ thống tự động tri��n khai web", "Phân tích dữ liệu lớn", "Ứng dụng quản lý bệnh viện", "Hệ thống quản lý doanh nghiệp", "Hệ thống quản lý Java Enterprise",
             "Hệ thống CI/CD"]
 
 achievements = ["Giải Nhất Hackathon 2021", "Nhân viên xuất sắc Công ty XYZ", "Giải Ba cuộc thi lập trình quốc gia", "Giải Nhất cuộc thi Code Wars",
@@ -90,7 +90,7 @@ phones = ["0987654321", "0912345678", "0909876543", "0981234567", "0918765432",
           "0909776655", "0911223344", "0933445566", "0922334455", "0907654321",
           "0901231234"]
 
-# Hàm tạo CV ngẫu nhiên
+# Hàm tạo CV ng���u nhiên
 def generate_cv():
     name = random.choice(names)
     city = random.choice(cities)
@@ -514,7 +514,7 @@ if role == "User":
             else:
                 st.warning("Không tìm thấy kỹ năng nào trong CV.")
             
-            # Xác định cấp độ
+            # Xác đ��nh cấp độ
             years_exp = extract_years_of_experience(content)
             candidate_level = predict_candidate_level(years_exp, len(skills))
             st.subheader("Cấp độ ứng viên:")
@@ -534,11 +534,23 @@ if role == "User":
             
             # Hiển thị điểm số
             st.subheader("Điểm CV:")
-            col1, col2 = st.columns([3, 1])
+            col1, col2, col3, col4, col5 = st.columns(5)
+
             with col1:
-                progress_bar = st.progress(int(score))
+                st.metric("Số kỹ năng", len(skills))
+
             with col2:
-                st.metric("Điểm số", f"{int(score)}%")
+                st.metric("Kinh nghiệm", f"{years_exp} năm")
+
+            with col3:
+                st.metric("Cấp độ", candidate_level)
+
+            with col4:
+                st.metric("Điểm CV", f"{int(score)}%")
+
+            with col5:
+                completed_sections = len([s for s, status in missing_sections if status == "✔️"])
+                st.metric("Độ hoàn thiện", f"{int(completed_sections/len(RECOMMENDED_SECTIONS)*100)}%")
             
             # Gợi ý kỹ năng cần cải thiện
             st.subheader("Gợi ý kỹ năng cần cải thiện:")

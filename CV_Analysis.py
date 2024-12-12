@@ -345,7 +345,7 @@ if role == "User":
         - 📈 Đề xuất kỹ năng cần phát triển
         """)
     with col2:
-        st.image("https://drive.google.com/file/d/1JAyBH_j7-jt1c7v-A44OqFAlUxOkQD95/view?usp=sharing", width=200)
+        st.image("https://drive.google.com/file/d/1JAyBH_j7-jt1c7v-A44OqFAlUxOkQD95/view", width=200)
     
     st.markdown("---")
     st.subheader("📄 Tải CV của bạn")

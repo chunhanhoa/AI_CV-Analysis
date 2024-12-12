@@ -345,7 +345,9 @@ if role == "User":
         - 📈 Đề xuất kỹ năng cần phát triển
         """)
     with col2:
-        st.image("https://www.freepik.com/premium-vector/cute-cats-greeting-have-nice-day-illustration_26308227.htm?epik=dj0yJnU9N0tVMmd1UjN1QVBRbGpZSHY5OUU5QUpZVE5oN1pFQUMmcD0wJm49TkhhQ29jLUl2b0M1bjF6Wkl0TW4xUSZ0PUFBQUFBR2RhV0Fv", width=200)
+        file_id = "1JAyBH_j7-jt1c7v-A44OqFAlUxOkQD95"
+        direct_link = f"https://drive.google.com/uc?export=view&id={file_id}"
+        st.image(direct_link, width=200)
     
     st.markdown("---")
     st.subheader("📄 Tải CV của bạn")

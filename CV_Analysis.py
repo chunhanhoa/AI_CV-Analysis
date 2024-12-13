@@ -700,7 +700,8 @@ elif role == "Admin":
                 fig2 = px.pie(
                     values=score_counts.values,
                     names=score_counts.index,
-                    title='Phân bố điểmm CV'
+                    title='Phân bố điểm CV',
+                    color_discrete_sequence=['#FF9F1C', '#2EC4B6', '#665191', '#FF69B4', '#5e60ce']
                 )
                 st.plotly_chart(fig2)
 

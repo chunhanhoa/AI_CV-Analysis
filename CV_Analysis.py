@@ -24,17 +24,18 @@ names = ["Nguyễn Anh Tuấn", "Trần Văn A", "Lê Thị B", "Nguyễn Thị 
          "Hoàng Minh Khang", "Lâm Thị Ngọc Mai", "Vũ Thị Hoa", "Trần Quốc Bảo", "Phạm Ngọc Linh",
          "Hồ Minh Quân", "Trương Văn Bình", "Đặng Minh Hùng", "Nguyễn Hải Yến", "Lê Thanh Tuấn",
          "Nguyễn Duy Nam", "Phạm Văn Hải", "Trần Thị Mai Phương", "Hoàng Minh Khang", "BÙI VĂN Q",
-         "ĐẶNG TUẤN P"]
+         "ĐẶNG TUẤN P", "Nguyễn Thanh Sơn", "Chu Tiến Luật", "Nguyễn Phương Nhi", "Nguyễn Quang Hải",
+         "Trịnh Trần Phương Tuấn", "Nguyễn Thanh Tùng", "Trần Vũ", "Lê Hồng Phúc", "Phạm Minh Trí"]
 
 cities = ["Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "Cần Thơ", "Nha Trang",
           "Hà Nội", "Đà Nẵng", "TP. Hồ Chí Minh", "Hà Nội", "TP. Hải Phòng",
           "TP. Nha Trang", "Hà Nội", "TP. Hồ Chí Minh", "TP. Cần Thơ", "TP. Hồ Chí Minh",
           "Hà Nội", "TP. Hồ Chí Minh", "TP. Đà Nẵng", "TP. Đà Nẵng", "TP. Hồ Chí Minh",
-          "TP. Hà Nội", "TP. Hồ Chí Minh", "Huế", "Hà Nội", "Đà Nẵng",
-          "Hà Nội", "Đà Lạt", "Hải Phòng", "Hồ Chí Minh", "Đà Nẵng",
-          "Hà Nội", "Đồng Nai", "Bình Dương", "Huế", "Cần Thơ",
-          "Hồ Chí Minh", "Hải Phòng", "Đà Nẵng", "Hà Nội", "TP.HCM",
-          "Hà Nội"]
+          "TP. Hà Nội", "TP. Hồ Chí Minh", "Huế", "Hà Nội", "Đà Nẵng", "Phan Rang",
+          "Hà Nội", "Đà Lạt", "Hải Phòng", "Hồ Chí Minh", "Đà Nẵng", "Đà Lạt", 
+          "Hà Nội", "Đồng Nai", "Bình Dương", "Huế", "Cần Thơ", "Tây Ninh",
+          "Hồ Chí Minh", "Hải Phòng", "Đà Nẵng", "Hà Nội", "TP.HCM", "Cần Giờ",
+          "Hà Nội", "Huế", "Nha Trang", "Quảng Ninh", "Nghệ An", "Long An", "Bà Rịa"]
 
 skills = ["Python, Java, SQL", "C#, JavaScript, HTML, CSS", "Node.js, React, MongoDB", "Java, Kotlin, Android", "Go, Ruby, Docker",
           "Java, .NET, Oracle Database", "Data Analysis", "AI, Machine Learning", "Blockchain, Smart Contracts", "Mobile Development",
@@ -53,7 +54,7 @@ projects = ["Hệ thống quản lý sinh viên (2020)", "Ứng dụng di độn
             "Hệ thống quản lý học sinh (2023)", "Tối ưu hóa triển khai phần mềm", "Dự án nghiên cứu ML", "Hệ thống phân tích dữ liệu khách hàng", "Ứng dụng quản lý bệnh viện",
             "Hệ thống quản lý kho hàng (2022)", "Thiết kế logo và branding", "Khóa học Kỹ năng mềm", "Ứng dụng quản lý bán hàng", "Chiến dịch marketing số",
             "Quản lý dự án phần mềm lớn", "Hệ thống quản lý năng lượng tái tạo", "Ứng dụng quản lý lịch trình", "Dự án nghiên cứu ML", "Hệ thống dự đoán doanh thu ngành bán lẻ",
-            "Hệ thống tự động tri��n khai web", "Phân tích dữ liệu lớn", "Ứng dụng quản lý bệnh viện", "Hệ thống quản lý doanh nghiệp", "Hệ thống quản lý Java Enterprise",
+            "Hệ thống tự động triểnn khai web", "Phân tích dữ liệu lớn", "Ứng dụng quản lý bệnh viện", "Hệ thống quản lý doanh nghiệp", "Hệ thống quản lý Java Enterprise",
             "Hệ thống CI/CD"]
 
 achievements = ["Giải Nhất Hackathon 2021", "Nhân viên xuất sắc Công ty XYZ", "Giải Ba cuộc thi lập trình quốc gia", "Giải Nhất cuộc thi Code Wars",
@@ -88,9 +89,9 @@ phones = ["0987654321", "0912345678", "0909876543", "0981234567", "0918765432",
           "0922334455", "0905777766", "0912345678", "0988112233", "0905123456",
           "0938778889", "0975223344", "0988332211", "0908776654", "0938776543",
           "0909776655", "0911223344", "0933445566", "0922334455", "0907654321",
-          "0901231234"]
+          "0901231234", "0923323123", "0921837123", "0912312313", "0921321731"]
 
-# Hàm tạo CV ng���u nhiên
+# Hàm tạo CV ngẫu nhiên
 def generate_cv():
     name = random.choice(names)
     city = random.choice(cities)
@@ -526,7 +527,7 @@ if role == "User":
             else:
                 st.warning("Không tìm thấy kỹ năng nào trong CV.")
             
-            # Xác đ��nh cấp độ
+            # Xác định cấp độ
             years_exp = extract_years_of_experience(content)
             candidate_level = predict_candidate_level(years_exp, len(skills))
             st.subheader("Cấp độ ứng viên:")

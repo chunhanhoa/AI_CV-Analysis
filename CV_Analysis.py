@@ -111,10 +111,10 @@ def generate_cv():
     Số điện thoại: {phone}
     
     MỤC TIÊU NGHỀ NGHIỆP
-    Lập trình viên với 7 năm kinh nghiệm trong phát triển phần mềm, đặc biệt là xây dựng các ứng dụng web và hệ thống phân tán. Tôi luôn tìm kiếm thử thách mới và cơ hội để học hỏi, nhằm nâng cao kỹ năng và đóng góp cho sự phát triển của doanh nghiệp.
+    Lập trình viên với 8 năm kinh nghiệm trong phát triển phần mềm, đặc biệt là xây dựng các ứng dụng web và hệ thống phân tán. Tôi luôn tìm kiếm thử thách mới và cơ hội để học hỏi, nhằm nâng cao kỹ năng và đóng góp cho sự phát triển của doanh nghiệp.
 
     KINH NGHIỆM LÀM VIỆC
-    2019 - Nay | Công ty XYZ | Lập trình viên chính
+    2019 - Nay | Công ty XYZ | Lập trình vi��n chính
     • Tham gia thiết kế và phát triển ứng dụng quản lý dự án cho doanh nghiệp.
     • Làm việc với nhóm để cải thiện quy trình phát triển phần mềm.
     2017 - 2019 | Công ty 123 | Lập trình viên
@@ -242,7 +242,7 @@ SKILLS_KEYWORDS = [
     
 ]
 
-# Dữ liệu m��u mới cho các cấp độ ứng viên
+# Dữ liệu mẫu mới cho các cấp độ ứng viên
 X = np.array([ 
     [0, 5], [1, 10], [2, 15],  # Fresher (0-2 years)
     [2, 8], [3, 12], [2, 14],  # Junior (2-3 years)
@@ -697,6 +697,8 @@ if role == "User":
 
 elif role == "Admin":
     st.write("Xem các dữ liệu CV đã nộp")
+    
+    # Kiểm tra đăng nhập trước khi hiển thị nội dung
     if admin_login():
         st.header("Admin Dashboard")
         
@@ -705,54 +707,56 @@ elif role == "Admin":
             st.session_state.logged_in = False
             st.rerun()
         
-        # Load CV data
-        df = load_cv_data()
-        
-        if not df.empty:
-            total_users = df.shape[0]
-            st.write(f"Total CVs processed: {total_users}")
+        # Chỉ hiển thị nội dung khi đã đăng nhập thành công
+        if st.session_state.logged_in:
+            # Load CV data
+            df = load_cv_data()
             
-            # Statistics
-            st.subheader("📊 Thống kê tổng quan")
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                level_counts = pd.Series({
-                    'Fresher': random.randint(20, 30),
-                    'Junior': random.randint(15, 25),
-                    'Middle': random.randint(10, 20),
-                    'Senior': random.randint(5, 15)
-                })
+            if not df.empty:
+                total_users = df.shape[0]
+                st.write(f"Total CVs processed: {total_users}")
                 
-                fig1 = px.pie(
-                    values=level_counts.values,
-                    names=level_counts.index,
-                    title='Phân bố cấp độ kinh nghiệm của ứng viên'
-                )
-                st.plotly_chart(fig1)
-            
-            with col2:
-                score_counts = pd.Series({
-                    '0-20': random.randint(5, 10),
-                    '21-40': random.randint(10, 15),
-                    '41-60': random.randint(15, 20),
-                    '61-80': random.randint(20, 25),
-                    '81-100': random.randint(25, 30)
-                })
+                # Statistics
+                st.subheader("📊 Thống kê tổng quan")
+                col1, col2 = st.columns(2)
                 
-                fig2 = px.pie(
-                    values=score_counts.values,
-                    names=score_counts.index,
-                    title='Phân bố điểm CV',
-                    color_discrete_sequence=['#FF9F1C', '#2EC4B6', '#665191', '#FF69B4', '#5e60ce']
-                )
-                st.plotly_chart(fig2)
+                with col1:
+                    level_counts = pd.Series({
+                        'Fresher': random.randint(20, 30),
+                        'Junior': random.randint(15, 25),
+                        'Middle': random.randint(10, 20),
+                        'Senior': random.randint(5, 15)
+                    })
+                    
+                    fig1 = px.pie(
+                        values=level_counts.values,
+                        names=level_counts.index,
+                        title='Phân bố cấp độ kinh nghiệm của ứng viên'
+                    )
+                    st.plotly_chart(fig1)
+                
+                with col2:
+                    score_counts = pd.Series({
+                        '0-20': random.randint(5, 10),
+                        '21-40': random.randint(10, 15),
+                        '41-60': random.randint(15, 20),
+                        '61-80': random.randint(20, 25),
+                        '81-100': random.randint(25, 30)
+                    })
+                    
+                    fig2 = px.pie(
+                        values=score_counts.values,
+                        names=score_counts.index,
+                        title='Phân bố điểm CV',
+                        color_discrete_sequence=['#FF9F1C', '#2EC4B6', '#665191', '#FF69B4', '#5e60ce']
+                    )
+                    st.plotly_chart(fig2)
 
-            # Detailed data table
-            st.subheader("📋 Bảng dữ liệu chi tiết")
-            st.dataframe(df)
-        else:
-            st.warning("No CV data found.")
+                # Detailed data table
+                st.subheader("📋 Bảng dữ liệu chi tiết")
+                st.dataframe(df)
+            else:
+                st.warning("No CV data found.")
 
 
 

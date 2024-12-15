@@ -12,6 +12,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import re
 from datetime import datetime
+import sqlite3
+import hashlib
 
 # Load NLP model
 nlp = spacy.load("en_core_web_sm")
@@ -109,7 +111,7 @@ def generate_cv():
     Số điện thoại: {phone}
     
     MỤC TIÊU NGHỀ NGHIỆP
-    Lập trình viên với 8 năm kinh nghiệm trong phát triển phần mềm, đặc biệt là xây dựng các ứng dụng web và hệ thống phân tán. Tôi luôn tìm kiếm thử thách mới và cơ hội để học hỏi, nhằm nâng cao kỹ năng và đóng góp cho sự phát triển của doanh nghiệp.
+    Lập trình viên với 7 năm kinh nghiệm trong phát triển phần mềm, đặc biệt là xây dựng các ứng dụng web và hệ thống phân tán. Tôi luôn tìm kiếm thử thách mới và cơ hội để học hỏi, nhằm nâng cao kỹ năng và đóng góp cho sự phát triển của doanh nghiệp.
 
     KINH NGHIỆM LÀM VIỆC
     2019 - Nay | Công ty XYZ | Lập trình viên chính
@@ -240,7 +242,7 @@ SKILLS_KEYWORDS = [
     
 ]
 
-# Dữ liệu mẫu mới cho các cấp độ ứng viên
+# Dữ liệu m��u mới cho các cấp độ ứng viên
 X = np.array([ 
     [0, 5], [1, 10], [2, 15],  # Fresher (0-2 years)
     [2, 8], [3, 12], [2, 14],  # Junior (2-3 years)
@@ -271,22 +273,80 @@ def admin_login():
         admin_password = st.text_input("Password", type='password')
         
         if st.button('Login'):
-            if admin_user == 'a' and admin_password == '123':
+            conn = init_db()
+            c = conn.cursor()
+            c.execute('SELECT password_hash FROM admin WHERE username = ?', (admin_user,))
+            result = c.fetchone()
+            
+            if result and result[0] == hashlib.sha256(admin_password.encode()).hexdigest():
                 st.session_state.logged_in = True
                 st.success("Welcome to the Admin Side")
                 st.rerun()
             else:
-                st.error("Invalid credentials. Please try again.")
-                return False
-        return False
+                st.error("Invalid credentials")
+            conn.close()
+            return False
     return True
 
-# Load CV data from the CSV file
+def init_db():
+    conn = sqlite3.connect('cv_database.db')
+    c = conn.cursor()
+    
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS cv_data
+        (id INTEGER PRIMARY KEY AUTOINCREMENT,
+         cv_text TEXT,
+         skills TEXT,
+         level TEXT,
+         score REAL,
+         submit_date DATETIME,
+         sections TEXT)
+    ''')
+    
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS admin
+        (username TEXT PRIMARY KEY,
+         password_hash TEXT)
+    ''')
+    
+    admin_pass_hash = hashlib.sha256('123'.encode()).hexdigest()
+    c.execute('INSERT OR REPLACE INTO admin VALUES (?, ?)', ('a', admin_pass_hash))
+    
+    conn.commit()
+    return conn
+
+def save_cv_data(cv_data):
+    try:
+        conn = init_db()
+        c = conn.cursor()
+        
+        cv_text = cv_data['cv_text'][0]
+        skills = ','.join(cv_data['skills'][0]) if isinstance(cv_data['skills'][0], list) else cv_data['skills'][0]
+        level = cv_data['level'][0]
+        score = cv_data['score'][0]
+        submit_date = datetime.now()
+        sections = str(cv_data)
+        
+        c.execute('''
+            INSERT INTO cv_data 
+            (cv_text, skills, level, score, submit_date, sections)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (cv_text, skills, level, score, submit_date, sections))
+        
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        st.error(f"Error saving CV data: {str(e)}")
+
 def load_cv_data():
-    if os.path.exists("cv_data.csv"):
-        return pd.read_csv("cv_data.csv")
-    else:
-        st.warning("No CV data found.")
+    try:
+        conn = init_db()
+        query = "SELECT * FROM cv_data"
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        return df
+    except Exception as e:
+        st.error(f"Error loading CV data: {str(e)}")
         return pd.DataFrame()
 
 # Function to display pie charts
@@ -297,23 +357,6 @@ def display_pie_chart(data, column_name, title):
         st.plotly_chart(fig)
     else:
         st.warning(f"Column {column_name} not found in the data.")
-
-def save_cv_data(cv_data):
-    try:
-        df = pd.DataFrame(cv_data)
-        file_exists = os.path.exists("cv_data.csv")
-        
-        # Đảm bảo các cột cần thiết
-        required_columns = ['cv_text', 'skills', 'level', 'score']
-        for col in required_columns:
-            if col not in df.columns:
-                df[col] = None  # Tạo cột trống nếu chưa có
-        
-        # Lưu dữ liệu
-        df.to_csv("cv_data.csv", mode='a', header=not file_exists, index=False)
-        st.success("Đã lưu dữ liệu CV thành công")
-    except Exception as e:
-        st.error(f"Lỗi khi lưu dữ liệu: {str(e)}")
 
 # Extract text from PDF file
 def extract_text_from_pdf(pdf_file):

@@ -2,8 +2,7 @@
 
 ## Giới thiệu
 
-**AI_CV-Analysis** là một dự án nhằm áp dụng các kỹ thuật trí tuệ nhân tạo (AI) trong phân tích và xử lý hình ảnh, hỗ trợ các tác vụ như phân loại ảnh, nhận diện đối tượng và các ứng dụng thị giác máy tính khác.  
-Dự án được xây dựng nhằm tối ưu hóa quá trình xử lý và phân tích dữ liệu hình ảnh với mục tiêu đem lại những kết quả chính xác và hiệu quả cao.
+**AI_CV-Analysis** là một dự án áp dụng các kỹ thuật trí tuệ nhân tạo (AI) để phân tích và xử lý hồ sơ xin việc (CV) từ các tệp PDF và Word. Dự án giúp tự động trích xuất thông tin quan trọng như thông tin cá nhân, kỹ năng, kinh nghiệm làm việc và học vấn, hỗ trợ quy trình tuyển dụng hiệu quả hơn.
 
 ## Công nghệ sử dụng
 

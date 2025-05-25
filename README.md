@@ -1,10 +1,11 @@
-# 🤖 AI_CV-Analysis
+# AI_CV-Analysis
+Bạn có thể truy cập dự án tại đây nè:>  [AI-CV](https://cnhoa-aicvanalysis.streamlit.app/)
 
 **AI_CV-Analysis** là một dự án áp dụng các kỹ thuật trí tuệ nhân tạo (AI) để phân tích và xử lý hồ sơ xin việc (CV) từ các tệp PDF và Word. Dự án giúp tự động trích xuất thông tin quan trọng như thông tin cá nhân, kỹ năng, kinh nghiệm làm việc và học vấn, hỗ trợ quy trình tuyển dụng hiệu quả hơn.
 
 ---
 
-## 🛠️ Công nghệ sử dụng
+## Công nghệ sử dụng
 
 - **Python**: Ngôn ngữ lập trình chính của dự án.  
 - **TensorFlow / PyTorch**: Thư viện học sâu để xây dựng và huấn luyện mô hình.  
@@ -14,7 +15,7 @@
 
 ---
 
-## ⚙️ Cài đặt
+## Cài đặt
 
 **Yêu cầu:**
 
